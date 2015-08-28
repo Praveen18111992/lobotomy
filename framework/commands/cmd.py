@@ -33,7 +33,6 @@ class Run(Lobotomy):
             loader = Loader(args)
             global apk, apks
             apk, apks = loader.run_loader()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Loader"))
             Logger.run_logger(e.message)
@@ -53,7 +52,6 @@ class Run(Lobotomy):
             from framework.brains.apk.decompile import Decompile
             decompile = Decompile(args.split()[0], args.split()[1])
             decompile.run_decompile()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Decompile"))
             Logger.run_logger(e.message)
@@ -73,7 +71,6 @@ class Run(Lobotomy):
             from framework.brains.apk.enumeration.profiler import Profiler
             p = Profiler(globals()["apk"])
             p.run_profiler()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Profiler"))
             Logger.run_logger(e.message)
@@ -92,12 +89,10 @@ class Run(Lobotomy):
         try:
             from framework.brains.apk.enumeration.permissions import Permissions
             p = Permissions(globals()["apk"], globals()["apks"])
-
             if args == "list":
                 p.run_list_permissions()
             if args == "map":
                 p.run_map_permissions()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Permissions"))
             Logger.run_logger(e.message)
@@ -117,7 +112,6 @@ class Run(Lobotomy):
             from framework.brains.apk.enumeration.components import Components
             c = Components(globals()["apk"])
             c.enum_component()
-            
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Components"))
             Logger.run_logger(e.message)
@@ -137,7 +131,6 @@ class Run(Lobotomy):
             from framework.brains.apk.enumeration.attack_surface import AttackSurface
             c = AttackSurface(globals()["apk"])
             c.run_enum_attack_surface()
-            
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import AttackSurface"))
             Logger.run_logger(e.message)
@@ -157,7 +150,6 @@ class Run(Lobotomy):
             from framework.brains.apk.debuggable import Debuggable
             d = Debuggable(args.split()[0], args.split()[1])
             d.run_debuggable()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Debuggable"))
             Logger.run_logger(e.message)
@@ -182,7 +174,6 @@ class Run(Lobotomy):
             from framework.brains.dex2jar.d2j import D2J
             d = D2J(args.split()[0], args.split()[1])
             d.run_d2j()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import D2J"))
             Logger.run_logger(e.message)
@@ -206,12 +197,10 @@ class Run(Lobotomy):
         try:
             from framework.brains.bowser.bowser import Bowser
             b = Bowser(globals()["apks"], globals()["apk"])
-            
             if args.split()[0] == "enum":
                 b.run_bowser()
             if args.split()[0] == "parseUri":
                 b.run_parse_uri()
-        
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Bowser"))
             Logger.run_logger(e.message)
@@ -237,7 +226,6 @@ class Run(Lobotomy):
             from framework.brains.dynamic.logcat import Logcat
             l = Logcat()
             l.run_logcat()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Logcat"))
             Logger.run_logger(e.message)
@@ -257,15 +245,14 @@ class Run(Lobotomy):
             from framework.brains.dynamic.frida.instrumentation import Instrumentation
             i = Instrumentation(globals()["apk"])
             i.run_instrumentation()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Instrumentation"))
             Logger.run_logger(e.message)
 
     # Surgical
     # --------------------
-    # This module is designed to attempt and find
-    # potential vulnerabilities
+    # This module is designed to find android API implementations
+    # in the target APK
     #
 
     @staticmethod
@@ -281,10 +268,37 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.surgical.api import SurgicalAPI
-
             s = SurgicalAPI(globals()["apks"])
             s.run_surgical()
-
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import the SurgicalAPI"))
+            Logger.run_logger(e.message)
+
+    # Exploits
+    # --------------------
+    # Collection of available exploits
+    #
+    #
+
+    @staticmethod
+    def do_exploit(args):
+
+        """
+        Description: Instantiates the ExploitAPI with available exploits
+
+        Requirements: Loaded APK
+
+        Usage: [exploit] & [type] & [name] [module] - Example: exploit browser mercury wfm
+        """
+
+        try:
+            from framework.brains.exploits.api import ExploitAPI
+            if args.split()[0] and args.split()[1] and args.split()[2]:
+                # The Exploit API is always
+                # expecting these **kwargs
+                ExploitAPI(exploit=args.split()[0], name=args.split()[1], module=args.split()[2])
+            else:
+                print(t.red("[{0}] ".format(datetime.now()) + "Not enough arguments!"))
+        except ImportError as e:
+            print(t.red("[{0}] ".format(datetime.now()) + "Unable to import the ExploitAPI"))
             Logger.run_logger(e.message)
