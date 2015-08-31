@@ -36,15 +36,15 @@ class Bowser(object):
 
         if x:
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Searching for parseUri()")))
+                          t.yellow("Searching for parseUri")))
             analysis.show_Paths(self.apks, x.get_tainted_packages().search_methods(".", "parseUri", "."))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Searching for loadUrl()")))
+                          t.yellow("Searching for loadUrl")))
             analysis.show_Paths(self.apks, x.get_tainted_packages().search_methods(".", "loadUrl", "."))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Searching for addJavascriptInterface()")))
+                          t.yellow("Searching for addJavascriptInterface")))
             analysis.show_Paths(self.apks, x.get_tainted_packages().search_methods(".", "addJavascriptInterface", "."))
 
     def run_parse_uri(self):

@@ -8,6 +8,7 @@ t = Terminal()
 
 
 class Instrumentation(object):
+
     def __init__(self, apk):
 
         super(Instrumentation, self).__init__()
@@ -15,7 +16,6 @@ class Instrumentation(object):
 
     @staticmethod
     def on_message(message, data):
-
         if message:
             print(t.green("[{0}] ".format(datetime.now())) + message["payload"])
 

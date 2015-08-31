@@ -27,9 +27,7 @@ class D2J(object):
 
         try:
             Popen(["{0} output/d2j/{1}.jar {2}".format(D2JEnum.commands.get("decompile"),
-                                                       self.directory, self.apk)],
-                  shell=True).wait()
-
+                                                       self.directory, self.apk)], shell=True).wait()
             print(t.green("[{0}] ".format(datetime.now())) +
                   t.yellow("Finished!"))
 
