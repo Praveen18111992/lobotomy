@@ -35,15 +35,21 @@ class SurgicalAPI(object):
 
         print(t.green("[{0}] ".format(datetime.now()) +
                       t.yellow("Enter \'quit\' to exit")))
+
+        print(t.green("[{0}] ".format(datetime.now()) +
+                      t.yellow("Enter \'list\' to show available functions")))
         while True:
             # Assign target API
             # function
             #
             function = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter function: ")))
 
+            if function == "list":
+                for f in self.functions:
+                    print(t.green("[{0}] ".format(datetime.now())) +
+                          f.__getattribute__("name"))
             if function == "quit":
                 break
-
             # Match on Class attribute
             # and call run() function
             # of target class
