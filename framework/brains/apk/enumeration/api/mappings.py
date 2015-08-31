@@ -1,4 +1,4 @@
-from framework.enums.enums import APIMappings
+from framework.brains.apk.enumeration.api.enum import APIMappings
 from androguard.core.analysis import analysis
 from datetime import datetime
 from blessings import Terminal
