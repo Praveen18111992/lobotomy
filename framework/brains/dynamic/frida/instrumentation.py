@@ -16,8 +16,38 @@ class Instrumentation(object):
 
     @staticmethod
     def on_message(message, data):
-        if message:
-            print(t.green("[{0}] ".format(datetime.now())) + message["payload"])
+        try:
+            if message:
+                print(t.green("[{0}] ".format(datetime.now())) + message["payload"])
+        except Exception as e:
+            print(message)
+            print(e)
+
+    @staticmethod
+    def do_inputStream():
+
+        """
+        Instrument calls made to InputStream functionality
+        """
+        inputStream = """
+
+        Dalvik.perform(function () {
+
+            var InputStream = Dalvik.use("java.io.InputStream");
+
+            InputStream.read.overload("java.lang.Byte","java.lang.Integer","java.lang.Integer").implementation = function (b, i, i) {
+
+                send("read()");
+
+                this.read.overload("java.lang.Byte", "java.lang.Integer", "java.lang.Integer").call(this, b, i, i);
+
+            };
+
+        });
+
+        """
+
+        return inputStream
 
     @staticmethod
     def do_webview():
@@ -125,37 +155,35 @@ class Instrumentation(object):
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Available Frida functions: ") +
-                          "activities, webview"))
+                          "activities, webview, inputStream"))
 
             function = raw_input(t.green("[{0}] ".format(datetime.now())
                                          + t.yellow("Enter Frida function: ")))
 
             if function == "quit":
                 break
-
             try:
                 if function == "activities":
-                    # adb forward just
-                    # in case
-                    #
                     Popen("adb forward tcp:27042 tcp:27042", shell=True).wait()
                     process = frida.get_device_manager().enumerate_devices()[-1].attach(self.apk.get_package())
                     script = process.create_script(self.do_activities())
                     script.on('message', self.on_message)
                     script.load()
                     sys.stdin.read()
-
                 elif function == "webview":
-                    # adb forward just
-                    # in case
-                    #
                     Popen("adb forward tcp:27042 tcp:27042", shell=True).wait()
                     process = frida.get_device_manager().enumerate_devices()[-1].attach(self.apk.get_package())
                     script = process.create_script(self.do_webview())
                     script.on('message', self.on_message)
                     script.load()
                     sys.stdin.read()
-
+                elif function == "inputStream":
+                    Popen("adb forward tcp:27042 tcp:27042", shell=True).wait()
+                    process = frida.get_device_manager().enumerate_devices()[-1].attach(self.apk.get_package())
+                    script = process.create_script(self.do_inputStream())
+                    script.on('message', self.on_message)
+                    script.load()
+                    sys.stdin.read()
             except frida.ProcessNotFoundError as e:
                 print(t.red("[{0}] ".format(datetime.now()) +
                             "Could not connect to target process!"))

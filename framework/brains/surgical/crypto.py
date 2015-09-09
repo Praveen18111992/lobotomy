@@ -1,4 +1,5 @@
 from androguard.core.analysis import analysis
+from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -71,6 +72,11 @@ class Crypto(object):
                             for method in self.apks.get_methods():
                                 if method.get_name() == p.get_src(vm.get_class_manager())[1]:
                                     if method.get_class_name() == p.get_src(vm.get_class_manager())[0]:
+
+                                        mx = x.get_method(method)
+                                        d = decompile.DvMethod(mx)
+                                        d.process()
+
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                               t.yellow("Found: ") +
                                               "{0}".format(c)))
@@ -80,4 +86,6 @@ class Crypto(object):
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                                       t.yellow("Method: ") +
                                                       "{0}".format(method.get_name())))
+
                                         print(method.show())
+                                        print(d.get_source())

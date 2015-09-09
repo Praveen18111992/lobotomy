@@ -1,4 +1,5 @@
 from framework.brains.apk.enumeration.api.enum import APIMappings
+from androguard.decompiler.dad import decompile
 from androguard.core.analysis import analysis
 from datetime import datetime
 from blessings import Terminal
@@ -28,6 +29,11 @@ class APIPermissionMappings(object):
                 for method in apks.get_methods():
                     if method.get_name() == p.get_src(vm.get_class_manager())[1]:
                         if method.get_class_name() == p.get_src(vm.get_class_manager())[0]:
+
+                                        mx = x.get_method(method)
+                                        d = decompile.DvMethod(mx)
+                                        d.process()
+
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                               t.yellow("Found: ") +
                                               "{0}".format(method)))
@@ -37,7 +43,9 @@ class APIPermissionMappings(object):
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                                       t.yellow("Method: ") +
                                                       "{0}".format(method.get_name())))
-                                        print(method.show())
+
+                                        print(method.pretty_show())
+                                        print(d.get_source())
 
     def run_find_mapping(self):
 
