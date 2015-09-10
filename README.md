@@ -57,6 +57,7 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 - Building the **apktool** requires Java and has been validated against **1.8**
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   - **adb**  
+- In order to run setup.sh on OS X you will need to have wget installed i.e. ```brew install wget```
 
 ### Run Setup: 
 
