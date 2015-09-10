@@ -72,6 +72,8 @@ In order to use the Frida instrumentation module please make sure you have pushe
 
 Make sure you change the IP in **framework/config** to your local network IP.  This is used for the interactions with the deployed web services.
 
+If the apktool build fails with this error: https://github.com/iBotPeaches/Apktool/issues/918 - Follow the recommendations observed for the issue and trying running ```setup.sh``` again.
+
 ## Usage
 
 ### Help
