@@ -18,7 +18,7 @@ def intent_service():
             </head>
             <body>
                 <script>
-                    location.href="intent://#Intent;action=android.intent.action.VIEW;end";
+                    location.href="intent://#Intent;SEL;action=android.intent.action.VIEW;end";
                 </script>
             </body>
         </html>

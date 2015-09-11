@@ -29,6 +29,7 @@ class Instrumentation(object):
         """
         Instrument calls made to InputStream functionality
         """
+
         inputStream = """
 
         Dalvik.perform(function () {
