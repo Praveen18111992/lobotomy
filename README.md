@@ -54,9 +54,11 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 ## Installation and Setup
 
 - Lobotomy was built upon **Python 2.7.9** and was also validated against **2.7.10**
+- On OS X if you're using the built-in Python libraries and not Homebrew, run ```setup.sh``` with sudo
 - Building the **apktool** requires Java and has been validated against **1.8**
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   - **adb**  
+- In order to run setup.sh on OS X you will need to have wget installed i.e. ```brew install wget```
 
 ### Run Setup: 
 
@@ -69,6 +71,8 @@ In order to use the Frida instrumentation module please make sure you have pushe
 ```root@android:/ # /data/local/tmp/frida-server```
 
 Make sure you change the IP in **framework/config** to your local network IP.  This is used for the interactions with the deployed web services.
+
+If the apktool build fails with this error: https://github.com/iBotPeaches/Apktool/issues/918 - Follow the recommendations observed for the issue and trying running ```setup.sh``` again.
 
 ## Usage
 
