@@ -7,13 +7,8 @@ pip2.7 install --upgrade pip
 echo "[*] Installing requirements"
 pip2.7 install -r requirements
 
-# Download Androguard
-echo "[*] Cloning androguard"
-git clone https://github.com/androguard/androguard.git
-
 # Setup Androguard
 cd androguard
-git checkout 1.9
 python setup.py install
 cd ..
 
