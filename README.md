@@ -19,6 +19,7 @@
 Lobotomy is an Android security toolkit that will automate different Android assessments and reverse engineering tasks.  The goal of the Lobotomy toolkit is to provide a console environment, which would allow a user to load their target Android APK once, then have all the necessary tools without needing to exit that environment.  
 
 Lobotomy leverages and provides wrappers around other popular tools such as: 
+
 - **Androguard**
 - **apktool**
 - **Dex2Jar**
@@ -54,12 +55,9 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 ## Installation and Setup
 
 - Lobotomy was built upon **Python 2.7.9** and was also validated against **2.7.10**
-<<<<<<< HEAD
 - Building the **apktool** requires Java and has been validated against **1.7**
-=======
 - On OS X if you're using the built-in Python libraries and not Homebrew, run ```setup.sh``` with sudo
 - Building the **apktool** requires Java and has been validated against **1.8**
->>>>>>> 1.1
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   - **adb**  
 - In order to run setup.sh on OS X you will need to have wget installed i.e. ```brew install wget```
