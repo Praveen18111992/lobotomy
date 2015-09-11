@@ -36,7 +36,7 @@ class APIPermissionMappings(object):
 
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                               t.yellow("Found: ") +
-                                              "{0}".format(method)))
+                                              "{0}".format(method.get_name())))
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                                       t.yellow("Class: ") +
                                                       "{0}".format(method.get_class_name())))
