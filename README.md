@@ -55,6 +55,7 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 ## Installation and Setup
 
 - Lobotomy was built upon **Python 2.7.9** and was also validated against **2.7.10**
+- Right now I am maintaining a older stable version of Androguard (1.9) in order to support Lobotomy functionality
 - Building the **apktool** requires Java and has been validated against **1.7**
 - On OS X if you're using the built-in Python libraries and not Homebrew, run ```setup.sh``` with sudo
 - Building the **apktool** requires Java and has been validated against **1.8**
