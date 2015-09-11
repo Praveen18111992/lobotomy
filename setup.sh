@@ -11,6 +11,7 @@ git clone https://github.com/androguard/androguard.git
 
 # Setup Androguard
 cd androguard
+git checkout 1.9
 python setup.py install
 cd ..
 
