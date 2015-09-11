@@ -1,6 +1,9 @@
 from framework.brains.surgical.storage import InsecureStorage
 from framework.brains.surgical.crypto import Crypto
 from framework.brains.surgical.logging import Logging
+from framework.brains.surgical.ipc import IPC
+from framework.brains.surgical.zip import Zip
+from framework.brains.surgical.native import Native
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -15,7 +18,10 @@ class SurgicalAPI(object):
         self.storage = InsecureStorage(apks)
         self.crypto = Crypto(apks)
         self.logging = Logging(apks)
-        self.functions = [f for f in self.storage, self.crypto, self.logging]
+        self.ipc = IPC(apks)
+        self.zip = Zip(apks)
+        self.native = Native(apks)
+        self.functions = [f for f in self.storage, self.crypto, self.logging, self.ipc, self.zip, self.native]
 
     def run_surgical(self):
 
@@ -31,15 +37,21 @@ class SurgicalAPI(object):
 
         print(t.green("[{0}] ".format(datetime.now()) +
                       t.yellow("Enter \'quit\' to exit")))
+
+        print(t.green("[{0}] ".format(datetime.now()) +
+                      t.yellow("Enter \'list\' to show available functions")))
         while True:
             # Assign target API
             # function
             #
             function = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter function: ")))
 
+            if function == "list":
+                for f in self.functions:
+                    print(t.green("[{0}] ".format(datetime.now())) +
+                          f.__getattribute__("name"))
             if function == "quit":
                 break
-
             # Match on Class attribute
             # and call run() function
             # of target class

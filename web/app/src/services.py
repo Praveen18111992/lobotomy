@@ -18,7 +18,7 @@ def intent_service():
             </head>
             <body>
                 <script>
-                    location.href="intent:#Intent;action=android.intent.action.VIEW;end";
+                    location.href="intent://#Intent;SEL;action=android.intent.action.VIEW;end";
                 </script>
             </body>
         </html>
@@ -61,8 +61,8 @@ def logcat_service(method):
                 except IOError:
                     # Raise for now
                     # until a logger is implemented
-                    #
                     raise
                 return "Error"
         else:
             return "Error"
+

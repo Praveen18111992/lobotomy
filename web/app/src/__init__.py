@@ -5,5 +5,5 @@ from flask import Blueprint
 #
 src = Blueprint("src", __name__)
 
-from . import services, views
+from . import services, views, exploits
 

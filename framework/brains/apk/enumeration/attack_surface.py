@@ -45,7 +45,7 @@ class AttackSurface(object):
 
                             if activity.getAttribute("android:exported") == "true":
                                 print(t.green("[{0}] ".format(datetime.now()) +
-                                              t.yellow(" {0} : ".format(name)) +
+                                              t.yellow("{0} : ".format(name)) +
                                               t.cyan("Found exported activity!")))
 
                                 print(t.green("[{0}] ".format(datetime.now()) +

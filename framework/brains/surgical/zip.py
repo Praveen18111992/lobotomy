@@ -5,56 +5,79 @@ from blessings import Terminal
 t = Terminal()
 
 
-class CryptoEnum(object):
+class ZipEnum(object):
 
     values = {
 
-        "java.security.Key": [
+        "java.util.zip.ZipInputStream": [
 
-            "getAlgorithm"
-
-        ],
-
-        "javax.crypto.spec.SecurityKeySpec": [
-
-            "SecurityKeySpec",
-            "getAlgorithm"
+            "available",
+            "close",
+            "closeEntry",
+            "getNextEntry",
+            "read"
 
         ],
 
-        "javax.crypto.Cipher": [
+        "java.util.zip.DeflaterInputStream": [
 
-            "Cipher",
-            "doFinal",
-            "getIV",
-            "getInstance"
+            "available",
+            "close",
+            "mark",
+            "markSupported",
+            "read",
+            "reset",
+            "skip"
+
         ],
 
-        "javax.crypto.KeyGenerator": [
+        "java.util.zip.GZIPInputStream": [
 
-            "generateKey",
-            "getAlgorithm",
-            "getInstance"
+            "close",
+            "read"
 
+        ],
+
+        "java.util.zip.InflaterInputStream": [
+
+            "available",
+            "close",
+            "mark",
+            "markSupported",
+            "read",
+            "reset",
+            "skip"
+
+        ],
+
+        "java.util.zip.ZipFile": [
+
+            "close",
+            "entries",
+            "getComment",
+            "getEntry",
+            "getInputStream",
+            "getName",
+            "size"
         ]
 
     }
 
 
-class Crypto(object):
+class Zip(object):
 
-    name = "crypto"
+    name = "zip"
 
     def __init__(self, apks):
 
-        super(Crypto, self).__init__()
+        super(Zip, self).__init__()
         self.apks = apks
-        self.enum = CryptoEnum()
+        self.enum = ZipEnum()
 
     def run(self):
 
         """
-        Search for crypto API usage within target class and methods
+        Search for zip API usage within target class and methods
         """
 
         x = analysis.uVMAnalysis(self.apks.get_vm())
