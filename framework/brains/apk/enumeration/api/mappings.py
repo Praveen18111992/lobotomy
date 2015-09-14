@@ -15,7 +15,7 @@ class APIPermissionMappings(object):
         self.apks = apks
 
     @staticmethod
-    def run_search_method(apks, x, clz, method):
+    def run_search_method(apks, x, clz, method, permission):
 
         """
         Search for API calls and implementation location
@@ -26,25 +26,28 @@ class APIPermissionMappings(object):
 
         if paths:
             for p in paths:
-                for method in apks.get_methods():
-                    if method.get_name() == p.get_src(vm.get_class_manager())[1]:
-                        if method.get_class_name() == p.get_src(vm.get_class_manager())[0]:
+                for m in apks.get_methods():
+                    if m.get_name() == p.get_src(vm.get_class_manager())[1]:
+                        if m.get_class_name() == p.get_src(vm.get_class_manager())[0]:
 
-                                        mx = x.get_method(method)
+                                        mx = x.get_method(m)
                                         d = decompile.DvMethod(mx)
                                         d.process()
 
                                         print(t.green("[{0}] ".format(datetime.now()) +
-                                              t.yellow("Found: ") +
-                                              "{0}".format(method.get_name())))
+                                              t.yellow("Permission: ") +
+                                              "{0}".format(permission)))
+                                        print(t.green("[{0}] ".format(datetime.now()) +
+                                              t.yellow("Found Method: ") +
+                                              "{0}".format(method)))
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                                       t.yellow("Class: ") +
-                                                      "{0}".format(method.get_class_name())))
+                                                      "{0}".format(m.get_class_name())))
                                         print(t.green("[{0}] ".format(datetime.now()) +
                                                       t.yellow("Method: ") +
-                                                      "{0}".format(method.get_name())))
+                                                      "{0}".format(m.get_name())))
 
-                                        print(method.pretty_show())
+                                        print(m.pretty_show())
                                         print(d.get_source())
 
     def run_find_mapping(self):
@@ -80,11 +83,11 @@ class APIPermissionMappings(object):
                                           e))
 
                                     if f.get("method"):
-                                        self.run_search_method(self.apks, x, e, f.get("method"))
+                                        self.run_search_method(self.apks, x, e, f.get("method"), permission)
 
                                     elif f.get("methods"):
                                         for method in f.get("methods"):
-                                            self.run_search_method(self.apks, x, e, method)
+                                            self.run_search_method(self.apks, x, e, method, permission)
 
                             elif b.get("classes"):
                                 for g, h in b.get("classes").items():
@@ -93,8 +96,8 @@ class APIPermissionMappings(object):
                                           g))
 
                                     if h.get("method"):
-                                        self.run_search_method(self.apks, x, g, h.get("method"))
+                                        self.run_search_method(self.apks, x, g, h.get("method"), permission)
 
                                     elif h.get("methods"):
                                         for method in h.get("methods"):
-                                            self.run_search_method(self.apks, x, g, method)
+                                            self.run_search_method(self.apks, x, g, method, permission)

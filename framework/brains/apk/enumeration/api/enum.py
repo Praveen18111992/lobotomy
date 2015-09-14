@@ -210,6 +210,58 @@ class APIMappings(object):
 
                     },
 
-            }
+            },
 
+
+        "bluetooth":
+
+            {
+
+                "permission": "android.permission.BLUETOOTH_ADMIN",
+
+                "classes":
+
+                    {
+
+
+                        "android.bluetooth.BluetoothAdapter":
+
+                            {
+
+                                "methods":
+
+                                    [
+                                        "enable", "startDiscovery", "setName", "cancelDiscovery"
+
+                                    ]
+                            },
+
+                        "android.bluetooth.BluetoothA2dp":
+
+                            {
+
+                                "methods":
+
+                                    [
+                                        "isA2dpPlaying", "disconnect", "setPriority", "connect"
+                                    ]
+                            },
+
+                        "android.bluetooth.BluetoothHeadset":
+                            {
+
+                                "methods":
+
+                                    [
+
+                                        "setPriority", "stopVoiceRecognition", "getPriority",
+                                        "connect",
+
+                                    ]
+                            }
+
+                    }
+
+
+            }
     }
