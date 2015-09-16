@@ -130,7 +130,8 @@ class AttackSurface(object):
                 receivers = xml.getElementsByTagName("receiver")
 
                 for receiver in receivers:
-                    if receiver.getAttribute("android:name") == name:
+                    if receiver.getAttribute("android:name") == name \
+                            or receiver.getAttribute("android:name").split(".")[-1] == name.split(".")[-1]:
                         if receiver.getAttribute("android:exported"):
                             if receiver.getAttribute("android:exported") == "true":
                                 print(t.green("[{0}] ".format(datetime.now()) +
@@ -146,7 +147,8 @@ class AttackSurface(object):
                 providers = xml.getElementsByTagName("provider")
 
                 for provider in providers:
-                    if provider.getAttribute("android:name") == name:
+                    if provider.getAttribute("android:name") == name \
+                            or provider.getAttribute("android:name").split(".")[-1] == name.split(".")[-1]:
                         if provider.getAttribute("android:exported"):
                             if provider.getAttribute("android:exported") == "true":
                                 print(t.green("[{0}] ".format(datetime.now()) +
@@ -162,7 +164,9 @@ class AttackSurface(object):
                 services = xml.getElementsByTagName("service")
 
                 for service in services:
-                    if service.getAttribute("android:name") == name:
+                    if service.getAttribute("android:name") == name \
+                            or service.getAttribute("android:name").split(".")[-1] == name.split(".")[-1]:
+
                         if service.getAttribute("android:exported"):
                             if service.getAttribute("android:exported") == "true":
                                 print(t.green("[{0}] ".format(datetime.now()) +
