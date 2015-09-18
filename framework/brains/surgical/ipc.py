@@ -33,7 +33,40 @@ class IPCEnum(object):
             [
 
                 "parseUri",
-                "parseIntent"
+                "parseIntent",
+                "addCategory",
+                "addFlags",
+                "getAction",
+                "getBooleanArrayExtra",
+                "getBooleanExtra",
+                "getBundleExtra",
+                "getByteArrayExtra",
+                "getByteExtra",
+                "getCategories",
+                "getCharArrayExtra",
+                "getCharExtra",
+                "getCharSequenceArrayExtra",
+                "getCharSequenceArrayListExtra",
+                "getComponent",
+                "getDataString",
+                "getDoubleExtra",
+                "getDoubleString",
+                "getExtras",
+                "getFlags",
+                "getIntent",
+                "getIntExtra",
+                "getIntArrayExtra",
+                "getPackage",
+                "getParceableArrayExtra",
+                "getScheme",
+                "getSelector",
+                "getSerializableExtra"
+                "putExtra",
+                "readFromParcel",
+                "setData",
+                "setFlags",
+                "setSelector",
+                "setPackage"
 
             ],
 
