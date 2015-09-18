@@ -4,6 +4,7 @@ from framework.brains.surgical.logging import Logging
 from framework.brains.surgical.ipc import IPC
 from framework.brains.surgical.zip import Zip
 from framework.brains.surgical.native import Native
+from framework.brains.surgical.socket import Socket
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -21,13 +22,21 @@ class SurgicalAPI(object):
         self.ipc = IPC(apks)
         self.zip = Zip(apks)
         self.native = Native(apks)
-        self.functions = [f for f in self.storage, self.crypto, self.logging, self.ipc, self.zip, self.native]
+        self.socket = Socket(apks)
+        self.functions = [f for f in self.storage,
+                          self.crypto,
+                          self.logging,
+                          self.ipc,
+                          self.zip,
+                          self.native,
+                          self.socket]
 
     def run_surgical(self):
 
         """
         Helper function for API
         """
+
         print(t.green("[{0}] ".format(datetime.now()) +
                       t.yellow("Available functions: ")))
 
