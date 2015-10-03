@@ -59,6 +59,7 @@ class Crypto(object):
 
         x = analysis.uVMAnalysis(self.apks.get_vm())
         vm = self.apks.get_vm()
+        _structure = list()
 
         if x:
             print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
@@ -76,16 +77,42 @@ class Crypto(object):
                                         mx = x.get_method(method)
                                         d = decompile.DvMethod(mx)
                                         d.process()
+                                        _structure.append((c, method, d))
 
-                                        print(t.green("[{0}] ".format(datetime.now()) +
-                                              t.yellow("Found: ") +
-                                              "{0}".format(c)))
-                                        print(t.green("[{0}] ".format(datetime.now()) +
-                                                      t.yellow("Class: ") +
-                                                      "{0}".format(method.get_class_name())))
-                                        print(t.green("[{0}] ".format(datetime.now()) +
-                                                      t.yellow("Method: ") +
-                                                      "{0}".format(method.get_name())))
+        methods = [s[0] for s in _structure]
+        methods_set = set(methods)
 
-                                        print(method.show())
-                                        print(d.get_source())
+        for m in methods_set:
+            print(t.green("[{0}] ".format(datetime.now()) +
+                          t.yellow("Available logging methods: ") + "{0}".format(m)))
+
+        print(t.green("[{0}] ".format(datetime.now()) +
+                      t.yellow("Enter \'back\' to exit")))
+
+        print(t.green("[{0}] ".format(datetime.now()) +
+                      t.yellow("Enter \'list\' to show available functions")))
+
+        while True:
+
+            method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
+
+            for s in _structure:
+                if method == s[0]:
+                    print(t.green("[{0}] ".format(datetime.now()) +
+                                  t.yellow("Found: ") +
+                                  "{0}".format(s[0])))
+                    print(t.green("[{0}] ".format(datetime.now()) +
+                                  t.yellow("Class: ") +
+                                  "{0}".format(s[1].get_class_name())))
+                    print(t.green("[{0}] ".format(datetime.now()) +
+                                  t.yellow("Method: ") +
+                                  "{0}".format(s[1].get_name())))
+                    print(s[1].show())
+                    print(s[2].get_source())
+
+            if method == "back":
+                break
+            elif method == "list":
+                for m in methods_set:
+                    print(t.green("[{0}] ".format(datetime.now()) +
+                          t.yellow("Available logging methods: ") + "{0}".format(m)))

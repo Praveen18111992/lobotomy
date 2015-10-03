@@ -1,11 +1,9 @@
-import os
 from flask import render_template
 from . import src
 
 
 @src.route("/ui/home")
 def home_view():
-
     return render_template("home.html")
 
 
@@ -30,7 +28,6 @@ def logcat_view():
             with open("web/app/logs/flask.log", "w") as log:
                 log.write(e.message)
                 log.close()
-
         except IOError:
             # Raise for now
             # until a logger is implemented
