@@ -62,30 +62,12 @@ class Instrumentation(object):
         Dalvik.perform(function () {
 
             var WebView = Dalvik.use("android.webkit.WebView");
-            var WebViewClient = Dalvik.use("android.webkit.WebViewClient");
 
             WebView.loadUrl.overload("java.lang.String").implementation = function (s) {
 
                 send("loadUrl()");
 
                 this.loadUrl.overload("java.lang.String").call(this, s);
-
-            };
-
-            WebView.addJavascriptInterface.implementation = function (o, s) {
-
-                send("addJavascriptInterface()");
-
-                this.addJavascriptInterface(o, s);
-            };
-
-            WebViewClient.shouldOverrideUrlLoading.implement = function (o, s) {
-
-
-                send("shouldOverrideUrlLoading()");
-                send(s.toString());
-
-                this.shouldOverrideUrlLoading(o, s);
 
             };
 
@@ -107,25 +89,6 @@ class Instrumentation(object):
         Dalvik.perform(function () {
 
             var Activity = Dalvik.use("android.app.Activity");
-            var Intent = Dalvik.use("android.content.Intent");
-
-            Activity.onNewIntent.implementation = function (i) {
-
-                var intent = Dalvik.cast(i, Intent);
-                action = intent.getAction();
-                component = intent.getComponent();
-                extras = intent.getExtras();
-
-                send("onNewIntent()");
-                send(component.toString());
-                send(action.toString());
-
-                if(extras) {
-                                send("Found extras!");
-                            }
-
-                this.onNewIntent(i);
-            };
 
             Activity.onCreate.implementation = function (b) {
 

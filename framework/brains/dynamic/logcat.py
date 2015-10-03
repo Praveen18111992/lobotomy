@@ -46,13 +46,11 @@ class Logcat(object):
                               "Check flask.log"))
 
         except IOError as e:
-            print(t.red("[{0}] ".format(datetime.now()) +
-                        e))
+            print(t.red("[{0}] ".format(datetime.now())) + e)
             Logger.run_logger(e)
 
         except requests.ConnectionError as e:
-            print(t.red("[{0}] ".format(datetime.now()) +
-                        e.response))
+            print(t.red("[{0}] ".format(datetime.now())) + e.response)
             Logger.run_logger(e.response)
 
         return
