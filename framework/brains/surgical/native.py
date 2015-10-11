@@ -15,7 +15,7 @@ class Native(object):
     def run(self):
 
         """
-        Search dynamic code usage
+        Search native method usage
         """
 
         vm = self.apks.get_vm()
@@ -29,13 +29,8 @@ class Native(object):
             if method.get_access_flags() & 0x100:
                 native_methods.append((method.get_class_name(), method.get_name()))
         if native_methods:
-            print(t.green("[{0}] ".format(datetime.now())
-                          + "------"))
+            print(t.green("[{0}] ".format(datetime.now()) + "------"))
             for n in native_methods:
-                print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Found: ") + "{0}".format(n[1])))
-                print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Class: ") +
-                              "{0}".format(n[0])))
-                print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("------")))
+                print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Found: ") + "{0}".format(n[1])))
+                print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Class: ") + "{0}".format(n[0])))
+                print(t.green("[{0}] ".format(datetime.now()) + t.yellow("------")))

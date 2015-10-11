@@ -26,13 +26,27 @@ class Run(Lobotomy):
         Requirements: Target APK
 
         Usage: loader </path/to/apk>
+        Usage: loader apk </path/to/apk>
+
         """
 
         try:
             from framework.brains.apk.loader import Loader
+            # Pass arguments to
+            # the loader module
+            #
             loader = Loader(args)
-            global apk, apks
-            apk, apks = loader.run_loader()
+            global apk, apks, dex
+
+            if args.split()[0] == "apk":
+                apk = loader.run_loader()
+                apks = None
+            elif args.split()[0] == "dex":
+                dex = loader.run_loader()
+                apk = None
+                apks = None
+            else:
+                apk, apks = loader.run_loader()
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Loader"))
             Logger.run_logger(e.message)
@@ -69,8 +83,14 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.apk.enumeration.profiler import Profiler
-            p = Profiler(globals()["apk"])
-            p.run_profiler()
+            if globals()["apk"] is not None:
+                p = Profiler(globals()["apk"])
+                p.run_profiler()
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the profiler module without a loaded APK"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Profiler"))
             Logger.run_logger(e.message)
@@ -87,12 +107,25 @@ class Run(Lobotomy):
         """
 
         try:
-            from framework.brains.apk.enumeration.permissions import Permissions
-            p = Permissions(globals()["apk"], globals()["apks"])
+            from framework.brains.apk.enumeration.permissions import PermissionsList, PermissionsMap
             if args == "list":
-                p.run_list_permissions()
+                if globals()["apk"] is not None:
+                    p = PermissionsList(globals()["apk"])
+                    p.run_list_permissions()
+                else:
+                    print(t.red("[{0}] ".format(datetime.now())) +
+                          t.white("Module not available"))
+                    print(t.red("[{0}] ".format(datetime.now())) +
+                          t.white("You cannot list permissions with out a loaded APK"))
             if args == "map":
-                p.run_map_permissions()
+                if globals()["apk"] is not None and globals()["apks"] is not None:
+                    p = PermissionsMap(globals()["apk"], globals()["apks"])
+                    p.run_map_permissions()
+                else:
+                    print(t.red("[{0}] ".format(datetime.now())) +
+                          t.white("Module not available"))
+                    print(t.red("[{0}] ".format(datetime.now())) +
+                          t.white("You cannot map permissions with out an executable or APK"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Permissions"))
             Logger.run_logger(e.message)
@@ -110,8 +143,14 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.apk.enumeration.components import Components
-            c = Components(globals()["apk"])
-            c.enum_component()
+            if globals()["apk"] is not None:
+                c = Components(globals()["apk"])
+                c.enum_component()
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the components module without a loaded APK"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Components"))
             Logger.run_logger(e.message)
@@ -129,8 +168,14 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.apk.enumeration.attack_surface import AttackSurface
-            c = AttackSurface(globals()["apk"])
-            c.run_enum_attack_surface()
+            if globals()["apk"] is not None:
+                c = AttackSurface(globals()["apk"])
+                c.run_enum_attack_surface()
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the attacksurface module without a loaded APK"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import AttackSurface"))
             Logger.run_logger(e.message)
@@ -196,11 +241,17 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.bowser.bowser import Bowser
-            b = Bowser(globals()["apks"], globals()["apk"])
-            if args.split()[0] == "enum":
-                b.run_bowser()
-            if args.split()[0] == "parseUri":
-                b.run_parse_uri()
+            if globals()["apk"] is not None and globals()["apks"] is not None:
+                b = Bowser(globals()["apks"], globals()["apk"])
+                if args.split()[0] == "enum":
+                    b.run_bowser()
+                if args.split()[0] == "parseUri":
+                    b.run_parse_uri()
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the bowser module without a target executable"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Bowser"))
             Logger.run_logger(e.message)
@@ -243,8 +294,14 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.dynamic.frida.instrumentation import Instrumentation
-            i = Instrumentation(globals()["apk"])
-            i.run_instrumentation()
+            if globals()["apk"] is not None:
+                i = Instrumentation(globals()["apk"])
+                i.run_instrumentation()
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the frida module without a loaded APK"))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Instrumentation"))
             Logger.run_logger(e.message)
@@ -268,8 +325,22 @@ class Run(Lobotomy):
 
         try:
             from framework.brains.surgical.api import SurgicalAPI
-            s = SurgicalAPI(globals()["apks"])
-            s.run_surgical()
+
+            if globals()["apks"] is not None:
+                s = SurgicalAPI(globals()["apks"], "apks")
+                s.run_surgical()
+
+            elif globals()["dex"] is not None:
+                print("Running dex")
+                s = SurgicalAPI(globals()["dex"], "dex")
+                s.run_surgical()
+
+            else:
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("Module not available"))
+                print(t.red("[{0}] ".format(datetime.now())) +
+                      t.white("You cannot run the surgical module without a target executable"))
+
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + "Unable to import the SurgicalAPI"))
             Logger.run_logger(e.message)
@@ -294,8 +365,6 @@ class Run(Lobotomy):
         try:
             from framework.brains.exploits.api import ExploitAPI
             if args.split()[0] and args.split()[1] and args.split()[2]:
-                # The Exploit API is always
-                # expecting these **kwargs
                 ExploitAPI(exploit=args.split()[0], name=args.split()[1], module=args.split()[2])
             else:
                 print(t.red("[{0}] ".format(datetime.now()) + "Not enough arguments!"))

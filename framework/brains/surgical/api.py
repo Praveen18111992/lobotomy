@@ -12,24 +12,43 @@ t = Terminal()
 
 class SurgicalAPI(object):
 
-    def __init__(self, apks):
+    def __init__(self, vm, vm_type):
 
         super(SurgicalAPI, self).__init__()
-        self.apk = apks
-        self.storage = InsecureStorage(apks)
-        self.crypto = Crypto(apks)
-        self.logging = Logging(apks)
-        self.ipc = IPC(apks)
-        self.zip = Zip(apks)
-        self.native = Native(apks)
-        self.socket = Socket(apks)
-        self.functions = [f for f in self.storage,
-                          self.crypto,
-                          self.logging,
-                          self.ipc,
-                          self.zip,
-                          self.native,
-                          self.socket]
+
+        if vm_type == "apks":
+            self.apks = vm
+            self.storage = InsecureStorage(self.apks, vm_type)
+            self.crypto = Crypto(self.apks, vm_type)
+            self.logging = Logging(self.apks, vm_type)
+            self.ipc = IPC(self.apks, vm_type)
+            self.zip = Zip(self.apks, vm_type)
+            self.native = Native(self.apks)
+            self.socket = Socket(self.apks, vm_type)
+            self.functions = [f for f in self.storage,
+                              self.crypto,
+                              self.logging,
+                              self.ipc,
+                              self.zip,
+                              self.native,
+                              self.socket]
+
+        elif vm_type == "dex":
+            self.dex = vm
+            self.storage = InsecureStorage(self.dex, vm_type)
+            self.crypto = Crypto(self.dex, vm_type)
+            self.logging = Logging(self.dex, vm_type)
+            self.ipc = IPC(self.dex, vm_type)
+            self.zip = Zip(self.dex, vm_type)
+            self.native = Native(self.dex)
+            self.socket = Socket(self.dex, vm_type)
+            self.functions = [f for f in self.storage,
+                              self.crypto,
+                              self.logging,
+                              self.ipc,
+                              self.zip,
+                              self.native,
+                              self.socket]
 
     def run_surgical(self):
 
@@ -49,6 +68,7 @@ class SurgicalAPI(object):
 
         print(t.green("[{0}] ".format(datetime.now()) +
                       t.yellow("Enter \'list\' to show available functions")))
+
         while True:
             # Assign target API
             # function

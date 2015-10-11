@@ -4,13 +4,12 @@ from blessings import Terminal
 t = Terminal()
 
 
-class Permissions(object):
+class PermissionsList(object):
 
-    def __init__(self, apk, apks):
+    def __init__(self, apk):
 
-        super(Permissions, self).__init__()
+        super(PermissionsList, self).__init__()
         self.apk = apk
-        self.apks = apks
 
     def run_list_permissions(self):
 
@@ -24,6 +23,15 @@ class Permissions(object):
             print(t.green("[{0}] ".format(datetime.now())) +
                   t.yellow("Permission: ") +
                   permission)
+
+
+class PermissionsMap(object):
+
+    def __init__(self, apk, apks):
+
+        super(PermissionsMap, self).__init__()
+        self.apk = apk
+        self.apks = apks
 
     def run_map_permissions(self):
 
