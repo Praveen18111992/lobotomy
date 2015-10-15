@@ -197,6 +197,7 @@ class IPC(object):
 
             x = analysis.uVMAnalysis(self.vm)
             _vm = self.vm
+            _structure = list()
 
             selections = ["activity", "intent", "receiver", "context", "service"]
 
@@ -207,8 +208,6 @@ class IPC(object):
                 print(t.green("[{0}] ".format(datetime.now())) + "{0}".format(s))
 
             selection = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter selection: ")))
-
-            _structure = list()
 
             for a, b in self.enum.values.items():
                 if selection in a.lower():

@@ -115,7 +115,7 @@ class Socket(object):
 
         elif self.vm_type == "dex":
 
-            x = analysis.uVMAnalysis(self.vm.get_vm())
+            x = analysis.uVMAnalysis(self.vm)
             _vm = self.vm
             _structure = list()
 

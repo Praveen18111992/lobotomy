@@ -331,7 +331,6 @@ class Run(Lobotomy):
                 s.run_surgical()
 
             elif globals()["dex"] is not None:
-                print("Running dex")
                 s = SurgicalAPI(globals()["dex"], "dex")
                 s.run_surgical()
 
