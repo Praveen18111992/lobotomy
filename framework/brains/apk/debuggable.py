@@ -9,10 +9,10 @@ t = Terminal()
 
 
 class Debuggable(object):
+
     def __init__(self, directory, apk):
 
         super(Debuggable, self).__init__()
-
         self.directory = directory
         self.apk = apk
 
@@ -41,36 +41,31 @@ class Debuggable(object):
                   t.yellow("Adding android:debuggable=\"true\""))
 
             with open("output/{0}/AndroidManifest.xml".format(self.directory), "r+") as manifest:
-
-                # Using parseString() will prevent
-                # XML file size issues
+                # Read in the AndroidManifest.xml
                 #
                 xml = minidom.parseString(manifest.read())
-
-                # application if of
-                # type NodeList
+                # Get the <application/> tag element
                 #
                 application = xml.getElementsByTagName("application")
+                # Set the debuggable attribute within the
+                # application tag element
+                #
                 application[0].setAttribute("android:debuggable", "true")
-
-                # We need to adjust the
-                # position of where we begin
-                # write and use truncation in order
-                # not to corrupt the XML structure
+                # Write and close the modified XML
                 #
                 manifest.seek(0)
                 xml.writexml(manifest)
                 manifest.truncate()
                 manifest.close()
-
+        # Exception handlers
+        # for I/O, OS, and DOM issues
+        #
         except OSError as e:
             print(t.red("[{0}]".format(datetime.now()) + "Process exception, check the logs"))
             Logger.run_logger(e.message)
-
         except IOError as e:
             print(t.red("[{0}]".format(datetime.now()) + "IO exception, check the logs"))
             Logger.run_logger(e.message)
-
         except DOMException as e:
             print(t.red("[{0}]".format(datetime.now()) + "XML exception, check the logs"))
             Logger.run_logger(e.message)
@@ -106,7 +101,10 @@ class Debuggable(object):
             #
             Popen(["rm lobotomy-key.keystore"],
                   shell=True).wait()
-
+        # Exception handler
+        # for process exception
+        # issues
+        #
         except OSError as e:
             print(t.red("[{0}]".format(datetime.now()) + "Process exception, check the logs"))
             Logger.run_logger(e.message)
