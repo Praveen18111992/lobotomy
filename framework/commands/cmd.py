@@ -329,11 +329,9 @@ class Run(Lobotomy):
             if globals()["apks"] is not None:
                 s = SurgicalAPI(globals()["apks"], "apks")
                 s.run_surgical()
-
             elif globals()["dex"] is not None:
                 s = SurgicalAPI(globals()["dex"], "dex")
                 s.run_surgical()
-
             else:
                 print(t.red("[{0}] ".format(datetime.now())) +
                       t.white("Module not available"))

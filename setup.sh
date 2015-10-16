@@ -12,15 +12,6 @@ cd androguard
 python setup.py install
 cd ..
 
-# Download and build apktool
-echo "[*] Downloading and building the apktool "
-git clone git://github.com/iBotPeaches/Apktool.git
-cd Apktool
-./gradlew build fatJar
-mv brut.apktool/apktool-cli/build/libs/apktool-cli.jar ../apktool.jar
-cd ..
-rm -rf Apktool/
-
 # Download and unzip dex2jar
 echo "[*] Downloading dex2jar"
 wget https://bitbucket.org/pxb1988/dex2jar/downloads/dex2jar-2.0.zip
