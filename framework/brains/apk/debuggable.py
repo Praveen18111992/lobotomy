@@ -1,3 +1,4 @@
+import os
 from framework.logging.logger import Logger
 from subprocess import Popen
 from datetime import datetime
@@ -32,8 +33,9 @@ class Debuggable(object):
               self.apk)
 
         try:
-            Popen(["java -jar apktool.jar d {0} -f -o output/{1}".format(self.apk, self.directory)],
-                  shell=True).wait()
+            Popen(["java -jar {0} d {1} -f -o output/{2}".format("".join([os.getcwd(), "/bin/apktool.jar"]),
+                                                                 self.apk,
+                                                                 self.directory)], shell=True).wait()
 
             print(t.green("[{0}] ".format(datetime.now())) +
                   t.yellow("Adding android:debuggable=\"true\""))
@@ -78,8 +80,8 @@ class Debuggable(object):
                   t.yellow("Building APK : ") +
                   self.directory)
 
-            Popen(["java -jar apktool.jar b output/{0} -o output/{0}/{0}.apk".format(self.directory)],
-                  shell=True).wait()
+            Popen(["java -jar {0} b output/{1} -o output/{1}/{1}.apk".format("".join([os.getcwd(), "/bin/apktool.jar"]),
+                                                                             self.directory)], shell=True).wait()
 
             print(t.green("[{0}] ".format(datetime.now())) +
                   t.yellow("Building completed"))
