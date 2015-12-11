@@ -54,14 +54,14 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 
 ## Installation and Setup
 
-- Lobotomy was built upon **Python 2.7.9** and was also validated against **2.7.10**
+- Lobotomy was built upon Homebrew's **Python 2.7.9** and was also validated against **2.7.10**, **2.7.11**
+- For Lobotomy to properly implement the dependencies, a Homebrew installation of Python is required. (Linuxbrew for Linux systems)
+- The PYTHONPATH must then be pointed to the Homebrew installation of Python.
 - Right now I am maintaining a older stable version of Androguard (1.9) in order to support Lobotomy functionality
 - Building the **apktool** requires Java and has been validated against **1.7**
-- On OS X if you're using the built-in Python libraries and not Homebrew, run ```setup.sh``` with sudo
 - Building the **apktool** requires Java and has been validated against **1.8**
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   - **adb**  
-- In order to run setup.sh on OS X you will need to have wget installed i.e. ```brew install wget```
 - If running on OS X you will need Xcode, and be sure to run - ```xcode-select --install``` - so that you have the required CLI tools
 
 ### Run Setup: 
