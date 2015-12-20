@@ -103,11 +103,7 @@ class InsecureStorage(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-<<<<<<< HEAD
                               t.yellow("Available storage methods: ") + "{0}".format(m)))
-=======
-                              t.yellow("Available storage method: ") + "{0}".format(m)))
->>>>>>> 142382e8c5a8673981443c417c479228e34f3ef9
 
         elif self.vm_type == "dex":
 

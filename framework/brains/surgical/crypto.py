@@ -149,11 +149,7 @@ class Crypto(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-<<<<<<< HEAD
                               t.yellow("Available crypto methods: ") + "{0}".format(m)))
-=======
-                              t.yellow("Available crypto method: ") + "{0}".format(m)))
->>>>>>> 142382e8c5a8673981443c417c479228e34f3ef9
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))

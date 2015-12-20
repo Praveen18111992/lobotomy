@@ -191,11 +191,7 @@ class IPC(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-<<<<<<< HEAD
-                              t.yellow("Available {0} methods: ") + "{1}".format(m, method)))
-=======
-                              t.yellow("Available intent method: ") + "{0}".format(m)))
->>>>>>> 142382e8c5a8673981443c417c479228e34f3ef9
+                              t.yellow("Available {0} methods: ") + "{1}".format(m, selection)))
 
         elif self.vm_type == "dex":
 

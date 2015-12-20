@@ -80,7 +80,7 @@ class Socket(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available socket methods: ") + "{0}".format(m)))
+                              t.yellow("Available logging methods: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -111,11 +111,7 @@ class Socket(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-<<<<<<< HEAD
-                              t.yellow("Available socket methods: ") + "{0}".format(m)))
-=======
-                              t.yellow("Available socket method: ") + "{0}".format(m)))
->>>>>>> 142382e8c5a8673981443c417c479228e34f3ef9
+                              t.yellow("Available logging methods: ") + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
@@ -146,7 +142,7 @@ class Socket(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available socket methods: ") + "{0}".format(m)))
+                              t.yellow("Available logging methods: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -177,4 +173,4 @@ class Socket(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available socket methods: ") + "{0}".format(m)))
+                              t.yellow("Available logging methods: ") + "{0}".format(m)))
