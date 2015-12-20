@@ -1,0 +1,8 @@
+.idea/*
+*.pyc
+.DS_Store
+apktool.jar
+build/*
+dex2jar-2.0/*
+frida-server
+pip-selfcheck.json
