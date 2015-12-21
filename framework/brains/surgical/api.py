@@ -6,6 +6,7 @@ from framework.brains.surgical.zip import Zip
 from framework.brains.surgical.native import Native
 from framework.brains.surgical.socket import Socket
 from framework.brains.surgical.ssl import SSL
+from framework.brains.surgical.certkey import CertKey
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -27,6 +28,7 @@ class SurgicalAPI(object):
             self.native = Native(self.apks, vm_type)
             self.socket = Socket(self.apks, vm_type)
             self.ssl = SSL(self.apks, vm_type)
+            self.certkey = CertKey(self.apks, vm_type)
             self.functions = [f for f in self.storage,
                               self.crypto,
                               self.logging,
@@ -34,7 +36,8 @@ class SurgicalAPI(object):
                               self.zip,
                               self.native,
                               self.socket,
-                              self.ssl]
+                              self.ssl,
+                              self.certkey]
 
         elif vm_type == "dex":
             self.dex = vm

@@ -5,88 +5,64 @@ from blessings import Terminal
 t = Terminal()
 
 
-class SSLEnum(object):
+class CertKeyEnum(object):
 
     values = {
 
-        "java.net.ssl.SSLSocketFactory": [
+        "java.security.cert.CertStore": [
 
-            "createSocket",
-            "getDefault",
-            "getDefaultCipherSuites",
-            "getSupportCipherSuites"
-
-        ],
-
-        "android.net.ssl.SSLCertificateSocketFactory": [
-
-            "createSocket",
-            "getDefault",
-            "getDefaultCipherSuites",
-            "getInsecure",
-            "getSupportedCipherSuites",
-            "setHostname",
-            "setKeyManagers",
-            "setUseSessionTickets"
-
-        ],
-
-        "javax.net.ssl.SSLSocket": [
-
-            "addHandshakeCompletedListener",
-            "getEnableSessionCreation",
-            "getEnabledCipherSuites",
-            "getEnabledProtocols",
-            "getNeedClientAuth",
-            "getSSLParameters",
-            "getSession",
-            "getSupportedCipherSuites",
-            "getSupportedProtocols",
-            "getUseClientMode",
-            "getWantClientAuth",
-            "removeHandshakeCompletedListener",
-            "setEnableSessionCreation",
-            "setEnabledProtocols",
-            "setEnabledCipherSuites",
-            "setNeedClientAuth",
-            "setSSLParameters",
-            "setUseClientMode",
-            "setWantClientAuth",
-            "shutdownInput",
-            "shutdownOutput",
-            "startHandshake"
-
-        ],
-
-        "javax.net.ssl.TrustManagerFactory": [
-
-            "getAlgorithm",
-            "getDefaultAlgorithm"
-            "getInstance",
+            "getCRLs",
+            "getCertStoreParameters",
+            "getCertificates",
+            "getDefaultType",
+            "getInstances",
             "getProvider",
-            "getTrustManagers",
-            "init"
-        ]
+            "getType"
 
+        ],
+
+        "android.security.keystore.KeyGenParameterSpec": [
+
+            "getAlgorithmParameterSpec",
+            "getBlockModes",
+            "getCertificateNotAfter",
+            "getCertificateNotBefore",
+            "getCertificateSerialNumber",
+            "getCertificateSubject",
+            "getDigests",
+            "getEncryptionPaddings",
+            "getKeySize",
+            "getKeyValidityForConsumptionEnd",
+            "getKeyValidityForOriginationEnd",
+            "getKeyValidityStart",
+            "getKeystoreAlias",
+            "getPurposes",
+            "getSignaturePaddings",
+            "getUserAuthenticationValidtyDurationSeconds",
+            "isDigestsSpecified",
+            "isRandomizedEncryptionRequired",
+            "isUserAuthenticationRequired"
+
+        ]
 
     }
 
 
-class SSL(object):
+class CertKey(object):
 
-    name = "ssl"
+    name = "certkey"
 
     def __init__(self, vm, vm_type):
 
-        super(SSL, self).__init__()
+        super(CertKey, self).__init__()
         self.vm = vm
         self.vm_type = vm_type
-        self.enum = SSLEnum()
+        self.enum = CertKeyEnum()
 
     def run(self):
 
         """
-        Search for ssl API usage within target class and methods
+        Search for crypto API usage within target class and methods
         """
 
         if self.vm_type == "apks":
@@ -118,7 +94,7 @@ class SSL(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available ssl methods: ") + "{0}".format(m)))
+                              t.yellow("Available certkey method: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -149,7 +125,7 @@ class SSL(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available ssl methods: ") + "{0}".format(m)))
+                              t.yellow("Available certkey method: ") + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
@@ -180,7 +156,7 @@ class SSL(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available ssl methods: ") + "{0}".format(m)))
+                              t.yellow("Available certkey method: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -211,4 +187,4 @@ class SSL(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available ssl methods: ") + "{0}".format(m)))
+                              t.yellow("Available certkey method: ") + "{0}".format(m)))
