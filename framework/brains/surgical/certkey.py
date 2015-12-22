@@ -43,6 +43,70 @@ class CertKeyEnum(object):
             "isRandomizedEncryptionRequired",
             "isUserAuthenticationRequired"
 
+        ],
+
+        "java.security.KeyStore": [
+
+            "aliases",
+            "containsAlias",
+            "deleteEntry",
+            "entryInstanceOf",
+            "getCertificate",
+            "getCertificateAlias",
+            "getCertificateChain",
+            "getCreationDate",
+            "getDefaultType",
+            "getEntry",
+            "getInstance",
+            "getProvider",
+            "getType",
+            "isCertificateEntry",
+            "isKeyEntry",
+            "load",
+            "setCertificateEntry",
+            "setEntry",
+            "setKeyEntry",
+            "size",
+            "store"
+
+        ],
+
+        "java.security.KeyStore.Builder": [
+
+            "getKeyStore",
+            "getProtectionParameter",
+            "newInstance",
+
+        ],
+
+        "java.security.KeyStore.LoadStoreParameter": [
+
+            "getProtectionParameter"
+        ],
+
+        "java.security.KeyStore.PasswordProtection": [
+
+            "destroy",
+            "getPassword",
+            "isDestroyed"
+
+        ],
+
+        "java.security.KeyStore.PrivateKeyEntry": [
+
+            "getCertificate",
+            "getCertificateChain",
+            "getPrivateKey"
+        ],
+
+        "java.security.KeyStore.SecretKeyEntry": [
+
+            "getSecretKey"
+        ],
+
+        "java.security.KeyStore.TrustedCertificateEntry": [
+
+            "getTrustedCertificate"
         ]
 
     }
