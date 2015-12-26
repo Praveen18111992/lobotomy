@@ -7,6 +7,7 @@ from framework.brains.surgical.native import Native
 from framework.brains.surgical.socket import Socket
 from framework.brains.surgical.ssl import SSL
 from framework.brains.surgical.certkey import CertKey
+from framework.brains.surgical.clipboard import ClipBoard
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -29,15 +30,18 @@ class SurgicalAPI(object):
             self.socket = Socket(self.apks, vm_type)
             self.ssl = SSL(self.apks, vm_type)
             self.certkey = CertKey(self.apks, vm_type)
-            self.functions = [f for f in self.storage,
-                              self.crypto,
-                              self.logging,
-                              self.ipc,
-                              self.zip,
-                              self.native,
-                              self.socket,
-                              self.ssl,
-                              self.certkey]
+            self.clipboard = ClipBoard(self.apks, vm_type)
+            self.modules = [f for f in self.storage,
+                            self.crypto,
+                            self.logging,
+                            self.ipc,
+                            self.zip,
+                            self.native,
+                            self.socket,
+                            self.ssl,
+                            self.certkey,
+                            self.clipboard
+                            ]
 
         elif vm_type == "dex":
             self.dex = vm
@@ -50,15 +54,18 @@ class SurgicalAPI(object):
             self.socket = Socket(self.dex, vm_type)
             self.ssl = SSL(self.dex, vm_type)
             self.certkey = CertKey(self.dex, vm_type)
-            self.functions = [f for f in self.storage,
-                              self.crypto,
-                              self.logging,
-                              self.ipc,
-                              self.zip,
-                              self.native,
-                              self.socket,
-                              self.ssl,
-                              self.certkey]
+            self.clipboard = ClipBoard(self.dex, vm_type)
+            self.modules = [f for f in self.storage,
+                            self.crypto,
+                            self.logging,
+                            self.ipc,
+                            self.zip,
+                            self.native,
+                            self.socket,
+                            self.ssl,
+                            self.certkey,
+                            self.clipboard
+                            ]
 
     def run_surgical(self):
 
@@ -66,35 +73,27 @@ class SurgicalAPI(object):
         Helper function for API
         """
 
-        print(t.green("[{0}] ".format(datetime.now()) +
-                      t.yellow("Available functions: ")))
+        print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Available modules: ")))
 
-        for f in self.functions:
+        for m in self.modules:
             print(t.green("[{0}] ".format(datetime.now())) +
-                  f.__getattribute__("name"))
+                  m.__getattribute__("name"))
 
-        print(t.green("[{0}] ".format(datetime.now()) +
-                      t.yellow("Enter \'quit\' to exit")))
-
-        print(t.green("[{0}] ".format(datetime.now()) +
-                      t.yellow("Enter \'list\' to show available functions")))
+        print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'quit\' to exit")))
+        print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'list\' to show available modules")))
 
         while True:
-            # Assign target API
-            # function
-            #
-            function = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter function: ")))
-
-            if function == "list":
-                for f in self.functions:
+            # Assign target API function
+            module = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter module: ")))
+            # List available surgical modules
+            if module == "list":
+                for m in self.modules:
                     print(t.green("[{0}] ".format(datetime.now())) +
-                          f.__getattribute__("name"))
-            if function == "quit":
+                          m.__getattribute__("name"))
+            if module == "quit":
                 break
-            # Match on Class attribute
-            # and call run() function
-            # of target class
-            #
-            for f in self.functions:
-                if function == f.__getattribute__("name"):
-                    f.run()
+            # Match on Class attribute and call run() function of target class
+            for m in self.modules:
+                if module == m.__getattribute__("name"):
+                    # Run target module
+                    m.run()
