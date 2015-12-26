@@ -32,17 +32,11 @@ class Run(Lobotomy):
         """
         try:
             from framework.brains.apk.loader import Loader
-            # Pass arguments to
-            # the loader module
-            #
+            # Pass arguments to the loader module
             loader = Loader(args)
             # Define global variables
-            #
             global apk, apks, dex
-            # Begin to check
-            # command line arguments for the
-            # loader module
-            #
+            # Begin to check command line arguments for the loader module
             if args:
                 if args.split()[0] == enum.APK:
                     apk, apks = loader.run_loader(), None

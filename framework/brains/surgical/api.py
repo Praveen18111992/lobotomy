@@ -48,13 +48,17 @@ class SurgicalAPI(object):
             self.zip = Zip(self.dex, vm_type)
             self.native = Native(self.dex, vm_type)
             self.socket = Socket(self.dex, vm_type)
+            self.ssl = SSL(self.dex, vm_type)
+            self.certkey = CertKey(self.dex, vm_type)
             self.functions = [f for f in self.storage,
                               self.crypto,
                               self.logging,
                               self.ipc,
                               self.zip,
                               self.native,
-                              self.socket]
+                              self.socket,
+                              self.ssl,
+                              self.certkey]
 
     def run_surgical(self):
 
