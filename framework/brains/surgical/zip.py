@@ -7,6 +7,7 @@ t = Terminal()
 
 
 class ZipEnum(object):
+
     values = {
 
         "java.util.zip.ZipInputStream": [
@@ -108,7 +109,7 @@ class Zip(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available zip methods: ") + "{0}".format(m)))
+                              t.yellow("Available zip method: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -139,7 +140,7 @@ class Zip(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                                      t.yellow("Available zip methods: ") + "{0}".format(m)))
+                                      t.yellow("Available zip method: ") + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
@@ -169,7 +170,7 @@ class Zip(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available logging methods: ") + "{0}".format(m)))
+                              t.yellow("Available zip method: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -200,4 +201,4 @@ class Zip(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                                      t.yellow("Available zip methods: ") + "{0}".format(m)))
+                                      t.yellow("Available zip method: ") + "{0}".format(m)))
