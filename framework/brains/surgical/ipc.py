@@ -1,7 +1,9 @@
+from framework.brains.colorize.console import ColorizeConsole
 from androguard.core.analysis import analysis
 from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
+console = ColorizeConsole()
 t = Terminal()
 
 
@@ -124,12 +126,24 @@ class IPC(object):
 
     def run(self):
 
+        """
+        Search for IPC API usage within target class and methods
+        """
+
         if self.vm_type == "apks":
 
             x = analysis.uVMAnalysis(self.vm.get_vm())
             _vm = self.vm.get_vm()
 
-            selections = ["activity", "intent", "receiver", "context", "service"]
+            selections = [
+
+                "activity",
+                "intent",
+                "receiver",
+                "context",
+                "service"
+
+            ]
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Available selections: ")))
@@ -166,7 +180,7 @@ class IPC(object):
                           t.yellow("Enter \'back\' to exit")))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available functions")))
+                          t.yellow("Enter \'list\' to show available methods")))
 
             while True:
 
@@ -184,7 +198,7 @@ class IPC(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
@@ -202,7 +216,7 @@ class IPC(object):
             selections = ["activity", "intent", "receiver", "context", "service"]
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Available selections: ")))
+                          t.yellow("Available ipc selections: ")))
 
             for s in selections:
                 print(t.green("[{0}] ".format(datetime.now())) + "{0}".format(s))
@@ -234,7 +248,7 @@ class IPC(object):
                           t.yellow("Enter \'back\' to exit")))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available functions")))
+                          t.yellow("Enter \'list\' to show available methods")))
 
             while True:
 
@@ -252,7 +266,7 @@ class IPC(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break

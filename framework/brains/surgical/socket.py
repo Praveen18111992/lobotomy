@@ -1,7 +1,9 @@
+from framework.brains.colorize.console import ColorizeConsole
 from androguard.core.analysis import analysis
 from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
+console = ColorizeConsole()
 t = Terminal()
 
 
@@ -59,8 +61,6 @@ class Socket(object):
 
             if x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
-                # Get enum values
-                #
                 for a, b in self.enum.values.items():
                     for c in b:
                         paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
@@ -86,7 +86,7 @@ class Socket(object):
                           t.yellow("Enter \'back\' to exit")))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available functions")))
+                          t.yellow("Enter \'list\' to show available methods")))
 
             while True:
 
@@ -104,14 +104,14 @@ class Socket(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available logging methods: ") + "{0}".format(m)))
+                              t.yellow("Available socket methods: ") + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
@@ -142,13 +142,13 @@ class Socket(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available logging methods: ") + "{0}".format(m)))
+                              t.yellow("Available socket methods: ") + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
 
             print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available functions")))
+                          t.yellow("Enter \'list\' to show available methods")))
 
             while True:
 
@@ -166,11 +166,11 @@ class Socket(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available logging methods: ") + "{0}".format(m)))
+                              t.yellow("Available socket methods: ") + "{0}".format(m)))

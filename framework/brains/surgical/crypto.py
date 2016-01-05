@@ -1,7 +1,9 @@
+from framework.brains.colorize.console import ColorizeConsole
 from androguard.core.analysis import analysis
 from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
+console = ColorizeConsole()
 t = Terminal()
 
 
@@ -46,7 +48,6 @@ class Crypto(object):
     name = "crypto"
 
     def __init__(self, vm, vm_type):
-
         super(Crypto, self).__init__()
         self.vm = vm
         self.vm_type = vm_type
@@ -66,8 +67,6 @@ class Crypto(object):
 
             if x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
-                # Get enum values
-                #
                 for a, b in self.enum.values.items():
                     for c in b:
                         paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
@@ -111,7 +110,7 @@ class Crypto(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
@@ -128,8 +127,6 @@ class Crypto(object):
 
             if x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
-                # Get enum values
-                #
                 for a, b in self.enum.values.items():
                     for c in b:
                         paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
@@ -173,7 +170,7 @@ class Crypto(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break

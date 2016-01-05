@@ -8,6 +8,7 @@ from framework.brains.surgical.socket import Socket
 from framework.brains.surgical.ssl import SSL
 from framework.brains.surgical.certkey import CertKey
 from framework.brains.surgical.clipboard import ClipBoard
+from framework.brains.surgical.bowser import Bowser
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -31,6 +32,7 @@ class SurgicalAPI(object):
             self.ssl = SSL(self.apks, vm_type)
             self.certkey = CertKey(self.apks, vm_type)
             self.clipboard = ClipBoard(self.apks, vm_type)
+            self.bowser = Bowser(self.apks, vm_type)
             self.modules = [f for f in self.storage,
                             self.crypto,
                             self.logging,
@@ -40,7 +42,8 @@ class SurgicalAPI(object):
                             self.socket,
                             self.ssl,
                             self.certkey,
-                            self.clipboard
+                            self.clipboard,
+                            self.bowser
                             ]
 
         elif vm_type == "dex":
@@ -55,6 +58,7 @@ class SurgicalAPI(object):
             self.ssl = SSL(self.dex, vm_type)
             self.certkey = CertKey(self.dex, vm_type)
             self.clipboard = ClipBoard(self.dex, vm_type)
+            self.bowser = Bowser(self.dex, vm_type)
             self.modules = [f for f in self.storage,
                             self.crypto,
                             self.logging,
@@ -64,13 +68,14 @@ class SurgicalAPI(object):
                             self.socket,
                             self.ssl,
                             self.certkey,
-                            self.clipboard
+                            self.clipboard,
+                            self.bowser
                             ]
 
     def run_surgical(self):
 
         """
-        Helper function for API
+        Helper function for surgicalAPI
         """
 
         print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Available modules: ")))

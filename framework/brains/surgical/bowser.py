@@ -7,81 +7,79 @@ console = ColorizeConsole()
 t = Terminal()
 
 
-class InsecureStorageEnum(object):
+class BowserEnum(object):
 
     values = {
 
-        "android.os.Environment": [
+        "android.content.Intent": [
 
-            "getDataDirectory",
-            "getDownloadCacheDirectory",
-            "getExternalStorageDirectory",
-            "getExternalStoragePublicDirectory",
-            "getExternalStorageState",
-            "getRootDirectory",
-            "getStorageState",
-            "isExternalStorageEmulated",
-            "isExternalStorageRemovable"
+            "parseUri",
+            "setSelector"
 
+        ],
+
+        "android.webkit.WebView": [
+
+            "addJavascriptInterface",
+            "loadUrl",
+            "loadData"
         ]
 
     }
 
 
-class InsecureStorage(object):
+class Bowser(object):
 
-    name = "storage"
+    name = "bowser"
 
     def __init__(self, vm, vm_type):
-
-        super(InsecureStorage, self).__init__()
+        # The vm_type argument is always determined through the loader
+        super(Bowser, self).__init__()
         self.vm = vm
         self.vm_type = vm_type
-        self.enum = InsecureStorageEnum()
+        self.enum = BowserEnum()
 
     def run(self):
 
         """
-        Search for storage API usage within target class and methods
+        Search for Web Browser API usage within target class and methods
         """
 
         if self.vm_type == "apks":
-
-            x = analysis.uVMAnalysis(self.vm.get_vm())
+            # Get the DVM analysis object from Androguard
+            _x = analysis.uVMAnalysis(self.vm.get_vm())
             _vm = self.vm.get_vm()
             _structure = list()
 
-            if x:
+            if _x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
                 for a, b in self.enum.values.items():
                     for c in b:
-                        paths = x.get_tainted_packages().search_methods("{0}".format(b), "{0}".format(c), ".")
+                        paths = _x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
                         if paths:
                             for p in paths:
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-
-                                            mx = x.get_method(method)
+                                            # Start decompilation process for each method
+                                            mx = _x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-
+            # Iterate through the generated methods and
+            # create a unique set
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available storage methods: ") + "{0}".format(m)))
+                              t.yellow("Available bowser method: ") + "{0}".format(m)))
 
-            print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'back\' to exit")))
-
-            print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available methods")))
+            print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'back\' to exit")))
+            print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'list\' to show available methods")))
 
             while True:
-
+                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
 
                 for s in _structure:
@@ -95,6 +93,10 @@ class InsecureStorage(object):
                         print(t.green("[{0}] ".format(datetime.now()) +
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
+
+                        print("".join([s[1].get_class_name(), "->", s[1].get_name(),
+                                       s[1].get_descriptor(), s[1].get_access_flags_string()]))
+
                         print(s[1].show())
                         console.colorize_decompiled_method(str(s[2].get_source()))
 
@@ -103,45 +105,43 @@ class InsecureStorage(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available storage methods: ") + "{0}".format(m)))
+                              t.yellow("Available bowser method: ") + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
-            x = analysis.uVMAnalysis(self.vm)
+            _x = analysis.uVMAnalysis(self.vm)
             _vm = self.vm
             _structure = list()
 
-            if x:
+            if _x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
                 for a, b in self.enum.values.items():
                     for c in b:
-                        paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
+                        paths = _x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
                         if paths:
                             for p in paths:
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-
-                                            mx = x.get_method(method)
+                                            # Start decompilation process for each method
+                                            mx = _x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-
+            # Iterate through the generated methods and
+            # create a unique set
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available storage methods: ") + "{0}".format(m)))
+                              t.yellow("Available bowser method: ") + "{0}".format(m)))
 
-            print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'back\' to exit")))
-
-            print(t.green("[{0}] ".format(datetime.now()) +
-                          t.yellow("Enter \'list\' to show available methods")))
+            print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'back\' to exit")))
+            print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'list\' to show available methods")))
 
             while True:
-
+                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
 
                 for s in _structure:
@@ -163,6 +163,4 @@ class InsecureStorage(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available storage methods: ") + "{0}".format(m)))
-
-
+                              t.yellow("Available bowser method: ") + "{0}".format(m)))

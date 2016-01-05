@@ -22,10 +22,7 @@ class Native(object):
         if self.vm_type == "apks":
             _vm = self.vm.get_vm()
             _native_methods = list()
-            # Re-implementation of the Androguard
-            # code in order to handle the returned
-            # data
-            #
+            # Re-implementation of the Androguard code in order to handle the returned data
             for method in _vm.get_methods():
                 if method.get_access_flags() & 0x100:
                     _native_methods.append((method.get_class_name(), method.get_name()))

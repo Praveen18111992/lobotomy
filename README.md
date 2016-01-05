@@ -27,42 +27,51 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 
 ## Features
 
-- APK decompilation
-- APK conversion with Dex2Jar
-- Convert APK to a debuggable APK
-- APK Profiler
-- Enumerate attack surface:
-  - Intent Filters
-  - URL Schemes
-  - Exported Components
-- Enumerate application components:
-  - Activities 
-  - Broadcast Receivers
-  - Services
-  - Content Providers
-- Enumerate application permissions
-- Map permissions to API usage
-- Bowser toolkit:
-  - Enumerates methods: 
-    - parseUri() 
-    - loadUrl() 
-    - addJavascriptInterface()
-  - Triggers parseUri()
-- Logcat wrapper
-- Instrumentation with Frida
-- Web UI and Services
 
 ## Installation and Setup
 
-- Lobotomy was built upon Homebrew's **Python 2.7.9** and was also validated against **2.7.10**, **2.7.11**
-- For Lobotomy to properly implement the dependencies, a Homebrew installation of Python is required. (Linuxbrew for Linux systems)
-- The PYTHONPATH must then be pointed to the Homebrew installation of Python.
-- Right now I am maintaining a older stable version of Androguard (1.9) in order to support Lobotomy functionality
-- Building the **apktool** requires Java and has been validated against **1.7**
-- Building the **apktool** requires Java and has been validated against **1.8**
+- Lobotomy was built upon Homebrew's Python, and has been validated against versions:
+
+ - **2.7.9**
+ - **2.7.10** 
+ - **2.7.11**
+
+- For Lobotomy to properly implement its dependencies, a Homebrew installation of Python is required for OS X and LinuxBrew for Linux distributions
+
+- Download Homebrew
+- Download LinuxBrew
+
+- The ```PYTHONPATH``` must then be pointed to the Homebrew's linked installation of Python.
+- Building the **apktool** requires Java and has been validated against the following versions:  
+
+ - **1.7**
+ - **1.8**
+
+
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   - **adb**  
-- If running on OS X you will need Xcode, and be sure to run - ```xcode-select --install``` - so that you have the required CLI tools
+  
+- If you're running OS X you will need Xcode and its required CLI tools , so be sure to run - ```xcode-select --install``` after Xcode has been installed
+
+
+### PySide (OS X)
+
+- First you need to install ```qt``` and ```cmake``` through Homebrew: 
+
+``` brew install qt```
+``` brew install cmake```
+
+- Next you need to download and install ```PySide```: 
+
+``` git clone https://github.com/PySide/pyside-setup.git ```
+``` cd pyside-setup ```
+``` python setup.py bdistwheel ```
+
+- Add the following to your shell environment: 
+
+``` export DYLD_LIBRARY_PATH="/usr/local/lib/python2.7/site-packages/PySide" ```
+
+
 
 ### Run Setup: 
 

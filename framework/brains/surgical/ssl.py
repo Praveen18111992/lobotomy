@@ -1,7 +1,9 @@
+from framework.brains.colorize.console import ColorizeConsole
 from androguard.core.analysis import analysis
 from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
+console = ColorizeConsole()
 t = Terminal()
 
 
@@ -79,6 +81,7 @@ class SSL(object):
     def __init__(self, vm, vm_type):
 
         super(SSL, self).__init__()
+        # The vm_type argument is always determined through the loader
         self.vm = vm
         self.vm_type = vm_type
         self.enum = SSLEnum()
@@ -86,19 +89,17 @@ class SSL(object):
     def run(self):
 
         """
-        Search for ssl API usage within target class and methods
+        Search for SSLSocket and TrustManager API usage within target class and methods
         """
 
         if self.vm_type == "apks":
-
+            # Get the DVM analysis object from Androguard
             x = analysis.uVMAnalysis(self.vm.get_vm())
             _vm = self.vm.get_vm()
             _structure = list()
 
             if x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
-                # Get enum values
-                #
                 for a, b in self.enum.values.items():
                     for c in b:
                         paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
@@ -107,12 +108,13 @@ class SSL(object):
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-
+                                            # Start decompilation process for each method
                                             mx = x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-
+            # Iterate through the generated methods and
+            # create a unique set
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
@@ -127,7 +129,7 @@ class SSL(object):
                           t.yellow("Enter \'list\' to show available functions")))
 
             while True:
-
+                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
 
                 for s in _structure:
@@ -143,6 +145,7 @@ class SSL(object):
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
                         print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
@@ -159,8 +162,6 @@ class SSL(object):
 
             if x:
                 print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Performing surgery ...")))
-                # Get enum values
-                #
                 for a, b in self.enum.values.items():
                     for c in b:
                         paths = x.get_tainted_packages().search_methods("{0}".format(a), "{0}".format(c), ".")
@@ -169,12 +170,13 @@ class SSL(object):
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-
+                                            # Start decompilation process for each method
                                             mx = x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-
+            # Iterate through the generated methods and
+            # create a unique set
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
@@ -189,7 +191,7 @@ class SSL(object):
                           t.yellow("Enter \'list\' to show available functions")))
 
             while True:
-
+                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
 
                 for s in _structure:
@@ -204,7 +206,7 @@ class SSL(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break

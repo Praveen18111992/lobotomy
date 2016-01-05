@@ -1,7 +1,9 @@
+from framework.brains.colorize.console import ColorizeConsole
 from androguard.core.analysis import analysis
 from androguard.decompiler.dad import decompile
 from datetime import datetime
 from blessings import Terminal
+console = ColorizeConsole()
 t = Terminal()
 
 
@@ -25,7 +27,6 @@ class ClipBoard(object):
     name = "clipboard"
 
     def __init__(self, vm, vm_type):
-
         super(ClipBoard, self).__init__()
         self.vm = vm
         self.vm_type = vm_type
@@ -34,7 +35,7 @@ class ClipBoard(object):
     def run(self):
 
         """
-        Search for crypto API usage within target class and methods
+        Search for ClipBoardManager API usage within target class and methods
         """
 
         if self.vm_type == "apks":
@@ -90,7 +91,7 @@ class ClipBoard(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
@@ -152,7 +153,7 @@ class ClipBoard(object):
                                       t.yellow("Method: ") +
                                       "{0}".format(s[1].get_name())))
                         print(s[1].show())
-                        print(s[2].get_source())
+                        console.colorize_decompiled_method(str(s[2].get_source()))
 
                 if method == "back":
                     break
