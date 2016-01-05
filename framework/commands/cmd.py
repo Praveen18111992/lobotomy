@@ -23,12 +23,11 @@ class Run(Lobotomy):
         """
         Description: Load target APK or classes.dex for analysis
 
-        Requirements: Target APK
+        Requirements: APK or Dalvik Executable
 
         Usage: loader </path/to/apk> - Load APK which includes classes.dex
         Usage: loader apk </path/to/apk> - Load APK which does not include classes.dex
         Usage: loader dex </path/to/classes.dex> - Load classes.dex
-
         """
         try:
             from framework.brains.apk.loader import Loader
@@ -38,21 +37,20 @@ class Run(Lobotomy):
             global apk, apks, dex
             # Begin to check command line arguments for the loader module
             if args:
+                # APK only
                 if args.split()[0] == enum.APK:
                     apk, apks = loader.run_loader(), None
+                # DEX only
                 elif args.split()[0] == enum.DEX:
                     dex, apk, apks = loader.run_loader(), None, None
                 else:
                     apk, apks = loader.run_loader()
             else:
-                print(t.red("[{0}] ".format(datetime.now()) +
-                            t.white(enum.ARGUMENTS)))
+                print(t.red("[{0}] ".format(datetime.now()) + t.white(enum.ARGUMENTS)))
         except Exception as e:
             if e.message == enum.STRING_INDEX_ERROR or e.message == enum.LIST_INDEX_ERROR:
-                print(t.red("[{0}] ".format(datetime.now()) +
-                            t.white(enum.ARGUMENTS)))
-                print(t.red("[{0}] ".format(datetime.now()) +
-                            t.white(enum.LOADER_USAGE)))
+                print(t.red("[{0}] ".format(datetime.now()) + t.white(enum.ARGUMENTS)))
+                print(t.red("[{0}] ".format(datetime.now()) + t.white(enum.LOADER_USAGE)))
         except ImportError as e:
             print(t.red("[{0}] ".format(datetime.now()) + enum.IMPORT_ERROR_LOADER))
             Logger.run_logger(e.message)
