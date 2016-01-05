@@ -265,37 +265,6 @@ class Run(Lobotomy):
                 print(t.red("[{0}] ".format(datetime.now()) +
                             t.white(enum.D2J_USAGE)))
 
-    # Bowser
-    # --------------------
-    # bowser enum, bowser parseUri
-    #
-
-    @staticmethod
-    def do_bowser(args):
-        """
-        Description: Runs the bowser toolkit on a target APK
-
-        Requirements: Loaded APK, Lobotomy web services
-
-        Usage: bowser <enum> || <parseUri>
-        """
-        try:
-            from framework.brains.bowser.bowser import Bowser
-            if globals()["apk"] is not None and globals()["apks"] is not None:
-                b = Bowser(globals()["apks"], globals()["apk"])
-                if args.split()[0] == "enum":
-                    b.run_bowser()
-                if args.split()[0] == "parseUri":
-                    b.run_parse_uri()
-            else:
-                print(t.red("[{0}] ".format(datetime.now())) +
-                      t.white("Module not available"))
-                print(t.red("[{0}] ".format(datetime.now())) +
-                      t.white("You cannot run the bowser module without a target executable"))
-        except ImportError as e:
-            print(t.red("[{0}] ".format(datetime.now()) + "Unable to import Bowser"))
-            Logger.run_logger(e.message)
-
     # Dynamic
     # -----------------------
     # logcat, instrumentation
