@@ -55,12 +55,15 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 - First you need to install ```qt``` and ```cmake``` through Homebrew: 
 
 ``` brew install qt```
+
 ``` brew install cmake```
 
 - Next you need to download and install ```PySide```: 
 
 ``` git clone https://github.com/PySide/pyside-setup.git ```
+
 ``` cd pyside-setup ```
+
 ``` python setup.py bdistwheel ```
 
 - Add the following to your shell environment: 
