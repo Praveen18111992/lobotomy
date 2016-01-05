@@ -38,40 +38,34 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 
 - For Lobotomy to properly implement its dependencies, a Homebrew installation of Python is required for OS X and LinuxBrew for Linux distributions
 
-- Download Homebrew
-- Download LinuxBrew
-
 - The ```PYTHONPATH``` must then be pointed to the Homebrew's linked installation of Python.
 - Building the **apktool** requires Java and has been validated against the following versions:  
 
  - **1.7**
  - **1.8**
 
-
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
-  - **adb**  
+
+- **adb**  
   
 - If you're running OS X you will need Xcode and its required CLI tools , so be sure to run - ```xcode-select --install``` after Xcode has been installed
-
 
 ### PySide (OS X)
 
 - First you need to install ```qt``` and ```cmake``` through Homebrew: 
 
-* ``` brew install qt```
-* ``` brew install cmake```
+``` brew install qt```
+``` brew install cmake```
 
 - Next you need to download and install ```PySide```: 
 
-* ``` git clone https://github.com/PySide/pyside-setup.git ```
-* ``` cd pyside-setup ```
-* ``` python setup.py bdistwheel ```
+``` git clone https://github.com/PySide/pyside-setup.git ```
+``` cd pyside-setup ```
+``` python setup.py bdistwheel ```
 
 - Add the following to your shell environment: 
 
 ``` export DYLD_LIBRARY_PATH="/usr/local/lib/python2.7/site-packages/PySide" ```
-
-
 
 ### Run Setup: 
 
