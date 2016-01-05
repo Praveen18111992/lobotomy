@@ -45,8 +45,8 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
  - **1.8**
 
 - Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
-
-- **adb**  
+  
+ - **adb**  
   
 - If you're running OS X you will need Xcode and its required CLI tools , so be sure to run - ```xcode-select --install``` after Xcode has been installed
 
