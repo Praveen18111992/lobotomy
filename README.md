@@ -30,45 +30,46 @@ Lobotomy leverages and provides wrappers around other popular tools such as:
 
 ## Installation and Setup
 
-- Lobotomy was built upon Homebrew's Python, and has been validated against versions:
+Lobotomy was built upon Homebrew's Python, and has been validated against versions:
 
- - **2.7.9**
- - **2.7.10** 
- - **2.7.11**
+- **2.7.9**
+- **2.7.10** 
+- **2.7.11**
 
-- For Lobotomy to properly implement its dependencies, a Homebrew installation of Python is required for OS X and LinuxBrew for Linux distributions
+For Lobotomy to properly implement its dependencies, a Homebrew installation of Python is required for OS X and LinuxBrew for Linux distributions.
 
-- The ```PYTHONPATH``` must then be pointed to the Homebrew's linked installation of Python.
-- Building the **apktool** requires Java and has been validated against the following versions:  
+The ```PYTHONPATH``` must then be pointed to the Homebrew's linked installation of Python.
 
- - **1.7**
- - **1.8**
+Building the **apktool** requires Java and has been validated against the following versions:  
 
-- Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
+- **1.7**
+- **1.8**
+
+Lobotomy assumes that you have already downloaded the Android SDK and added the following tools to your path: 
   
- - **adb**  
+- **adb**  
   
-- If you're running OS X you will need Xcode and its required CLI tools , so be sure to run - ```xcode-select --install``` after Xcode has been installed
+If you're running OS X you will need Xcode and its required CLI tools , so be sure to run - ```xcode-select --install``` after Xcode has been installed.
 
 ### PySide (OS X)
 
-- First you need to install ```qt``` and ```cmake``` through Homebrew: 
+First you need to install ```qt``` and ```cmake``` through Homebrew: 
 
-``` brew install qt```
+- ``` brew install qt```
 
-``` brew install cmake```
+- ``` brew install cmake```
 
-- Next you need to download and install ```PySide```: 
+Next you need to download and install ```PySide```: 
 
-``` git clone https://github.com/PySide/pyside-setup.git ```
+- ``` git clone https://github.com/PySide/pyside-setup.git ```
 
-``` cd pyside-setup ```
+- ``` cd pyside-setup ```
 
-``` python setup.py bdistwheel ```
+- ``` python setup.py bdistwheel ```
 
-- Add the following to your shell environment: 
+Add the following to your shell environment: 
 
-``` export DYLD_LIBRARY_PATH="/usr/local/lib/python2.7/site-packages/PySide" ```
+- ``` export DYLD_LIBRARY_PATH="/usr/local/lib/python2.7/site-packages/PySide" ```
 
 ### Run Setup: 
 
