@@ -9,6 +9,7 @@ from framework.brains.surgical.ssl import SSL
 from framework.brains.surgical.certkey import CertKey
 from framework.brains.surgical.clipboard import ClipBoard
 from framework.brains.surgical.bowser import Bowser
+from framework.brains.surgical.hash import Hash
 from datetime import datetime
 from blessings import Terminal
 t = Terminal()
@@ -33,6 +34,7 @@ class SurgicalAPI(object):
             self.certkey = CertKey(self.apks, vm_type)
             self.clipboard = ClipBoard(self.apks, vm_type)
             self.bowser = Bowser(self.apks, vm_type)
+            self.hash = Hash(self.apks, vm_type)
             self.modules = [f for f in self.storage,
                             self.crypto,
                             self.logging,
@@ -43,7 +45,8 @@ class SurgicalAPI(object):
                             self.ssl,
                             self.certkey,
                             self.clipboard,
-                            self.bowser
+                            self.bowser,
+                            self.hash
                             ]
 
         elif vm_type == "dex":
@@ -59,6 +62,7 @@ class SurgicalAPI(object):
             self.certkey = CertKey(self.dex, vm_type)
             self.clipboard = ClipBoard(self.dex, vm_type)
             self.bowser = Bowser(self.dex, vm_type)
+            self.hash = Hash(self.dex, vm_type)
             self.modules = [f for f in self.storage,
                             self.crypto,
                             self.logging,
@@ -69,7 +73,8 @@ class SurgicalAPI(object):
                             self.ssl,
                             self.certkey,
                             self.clipboard,
-                            self.bowser
+                            self.bowser,
+                            self.hash
                             ]
 
     def run_surgical(self):
@@ -95,7 +100,7 @@ class SurgicalAPI(object):
                 for m in self.modules:
                     print(t.green("[{0}] ".format(datetime.now())) +
                           m.__getattribute__("name"))
-            if module == "quit":
+            if module == "quit" or "q":
                 break
             # Match on Class attribute and call run() function of target class
             for m in self.modules:
