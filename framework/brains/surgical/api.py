@@ -100,7 +100,7 @@ class SurgicalAPI(object):
                 for m in self.modules:
                     print(t.green("[{0}] ".format(datetime.now())) +
                           m.__getattribute__("name"))
-            if module == "quit" or "q":
+            if module == "quit":
                 break
             # Match on Class attribute and call run() function of target class
             for m in self.modules:

@@ -174,7 +174,7 @@ class IPC(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available {0} methods: ") + "{1}".format(m, selection)))
+                              t.yellow("Available {0} methods: ".format(selection)) + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -205,7 +205,7 @@ class IPC(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available {0} methods: ") + "{1}".format(m, selection)))
+                              t.yellow("Available {0} methods: ".format(selection)) + "{0}".format(m)))
 
         elif self.vm_type == "dex":
 
@@ -242,7 +242,7 @@ class IPC(object):
 
             for m in methods_set:
                 print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available {0} methods: ") + "{1}".format(m, selection)))
+                              t.yellow("Available {0} methods: ".format(selection)) + "{0}".format(m)))
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Enter \'back\' to exit")))
@@ -273,4 +273,4 @@ class IPC(object):
                 elif method == "list":
                     for m in methods_set:
                         print(t.green("[{0}] ".format(datetime.now()) +
-                              t.yellow("Available {0} methods: ") + "{1}".format(m, selection)))
+                              t.yellow("Available {0} methods: ".format(selection)) + "{0}".format(m)))
