@@ -213,7 +213,15 @@ class IPC(object):
             _vm = self.vm
             _structure = list()
 
-            selections = ["activity", "intent", "receiver", "context", "service"]
+            selections = [
+
+                "activity",
+                "intent",
+                "receiver",
+                "context",
+                "service"
+
+            ]
 
             print(t.green("[{0}] ".format(datetime.now()) +
                           t.yellow("Available ipc selections: ")))

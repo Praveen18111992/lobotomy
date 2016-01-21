@@ -80,7 +80,7 @@ class SurgicalAPI(object):
     def run_surgical(self):
 
         """
-        Helper function for surgicalAPI
+        Helper function for the surgicalAPI
         """
 
         print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Available modules: ")))

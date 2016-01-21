@@ -31,6 +31,52 @@ class SocketEnum(object):
             "setSoTimeout",
             "setSocketFactory"
 
+        ],
+
+        "java.net.Socket": [
+
+            "bind",
+            "close",
+            "connect",
+            "getChannel",
+            "getInetAddress",
+            "getInputStream",
+            "getKeepAlive",
+            "getLocalAddress",
+            "getLocalPort",
+            "getLocalSocketAddress",
+            "getOutputStream",
+            "getReceiveBufferSize",
+            "getRemoteSocketAddress",
+            "getReuseAddress",
+            "getSendBufferSize",
+            "isBound",
+            "isConnected",
+            "sendUrgentData",
+            "sendKeepAlive"
+        ],
+
+        "javax.net.ssl.SSLSocket": [
+
+            "addHandshakeCompletedListener",
+            "getEnableSessionCreation",
+            "getEnabledCipherSuites",
+            "getEnabledProtocols",
+            "getNeedClientAuth",
+            "getSSLParameters",
+            "getSession",
+            "getSupportedCipherSuites",
+            "getSupportedProtocols",
+            "getUseClientMode",
+            "getWantClientAuth",
+            "setEnableSessionCreation",
+            "setEnabledCipherSuites",
+            "setEnabledProtocols",
+            "setNeedClientAuth",
+            "setSSLParameters",
+            "setUseClientMode",
+            "setWantClientAuth",
+            "startHandshake"
         ]
 
     }

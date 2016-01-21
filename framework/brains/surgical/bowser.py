@@ -46,7 +46,6 @@ class Bowser(object):
         """
 
         if self.vm_type == "apks":
-            # Get the DVM analysis object from Androguard
             _x = analysis.uVMAnalysis(self.vm.get_vm())
             _vm = self.vm.get_vm()
             _structure = list()
@@ -61,13 +60,11 @@ class Bowser(object):
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-                                            # Start decompilation process for each method
                                             mx = _x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-            # Iterate through the generated methods and
-            # create a unique set
+
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
@@ -79,9 +76,7 @@ class Bowser(object):
             print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'list\' to show available methods")))
 
             while True:
-                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
-
                 for s in _structure:
                     if method == s[0]:
                         print(t.green("[{0}] ".format(datetime.now()) +
@@ -123,13 +118,10 @@ class Bowser(object):
                                 for method in self.vm.get_methods():
                                     if method.get_name() == p.get_src(_vm.get_class_manager())[1]:
                                         if method.get_class_name() == p.get_src(_vm.get_class_manager())[0]:
-                                            # Start decompilation process for each method
                                             mx = _x.get_method(method)
                                             d = decompile.DvMethod(mx)
                                             d.process()
                                             _structure.append((c, method, d))
-            # Iterate through the generated methods and
-            # create a unique set
             methods = [s[0] for s in _structure]
             methods_set = set(methods)
 
@@ -141,7 +133,6 @@ class Bowser(object):
             print(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter \'list\' to show available methods")))
 
             while True:
-                # Selected target method
                 method = raw_input(t.green("[{0}] ".format(datetime.now()) + t.yellow("Enter method selection: ")))
 
                 for s in _structure:
